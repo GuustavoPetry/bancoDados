@@ -20,7 +20,3 @@ Modele as tabelas para armazenar as informações.
 Defina as chaves primárias e estrangeiras.
 
 Pense nos índices necessários para otimizar buscas, como por CPF ou número da viagem.
-
-
-
-Dica: A relação entre passageiro, passagem e viagem é essencial (1 viagem pode ter vári pertence a 1 passageiro).as passagens, 1 passagem
