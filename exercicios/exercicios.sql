@@ -35,9 +35,19 @@ Mostre também:
 	•	A quantidade de produtos por categoria.
 	•	O preço médio dos produtos daquela categoria.
 	•	O produto mais caro da categoria.*/
-SELECT produtos.nome, produtos.preco, produtos.from_categorias, categorias.ativo FROM produtos
-INNER JOIN categorias ON produtos.from_categorias = categorias.id
-WHERE preco BETWEEN 500 AND 1000 AND categorias.ativo = 1
-AND produtos.nome LIKE "Cerveja%" GROUP BY from_categorias;
+SELECT
+p.nome,
+p.preco,
+c.titulo,
+c.ativo,
+COUNT(p.id) AS total_produtos,
+AVG(p.preco) AS valor_medio,
+MAX(p.preco) AS mais_caro
+FROM produtos p
+INNER JOIN categorias c ON p.from_categorias = c.id
+WHERE p.preco BETWEEN 500 AND 1000
+AND c.ativo = 1
+AND p.nome LIKE "Cerveja%"
+GROUP BY c.id;
 
     
