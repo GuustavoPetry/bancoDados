@@ -1,4 +1,4 @@
--- OBS: FOI UTILIZADO A MODELAGEM "modelagemRestaurante.sql" PARA FAZER OS EXERCICIOS.
+-- OBS: FOI UTILIZADO A MODELAGEM "modelagemEstudo.sql" PARA FAZER OS EXERCICIOS.
 
 -- 1. Liste todos os produtos com suas respectivas categorias
 SELECT produtos.id,
@@ -49,5 +49,54 @@ WHERE p.preco BETWEEN 500 AND 1000
 AND c.ativo = 1
 AND p.nome LIKE "Cerveja%"
 GROUP BY c.id;
+
+-- SELECT na tabela clientes utilizando as funções COUNT() e CONCAT():
+SELECT
+c.id,
+c.nome,
+e.cidade,
+e.principal,
+COUNT(e.id) AS total_enderecos,
+CONCAT(
+	e.logradouro, ', ',
+    e.numero, ' | ',
+    IF(e.complemento IS NOT NULL, CONCAT(e.complemento, ' | '), ''),
+    e.bairro, ' | ',
+    e.cidade, ' | ',
+    e.estado, ' | CEP: ',
+    e.cep
+) AS endereco
+FROM
+clientes c
+INNER JOIN clientes_enderecos e ON e.cliente_id = c.id AND e.principal = 1
+GROUP BY e.cliente_id
+ORDER BY e.cliente_id ASC;
+
+/* Exercicio:
+Crie uma tabela chamada alunos, com nome, nota1, nota2, nota3, nota4;
+Faça um Select de todas as colunas e calcule a média de cada aluno;
+Por fim, crie uma condicional para indicar a situação do aluno (reprovado, aprovado)
+ */
+CREATE TABLE alunos (
+    nome VARCHAR(100) NOT NULL,
+    nota1 DOUBLE NOT NULL,
+    nota2 DOUBLE NOT NULL,
+    nota3 DOUBLE NOT NULL,
+    nota4 DOUBLE NOT NULL
+);
+
+SELECT nome,
+nota1,
+nota2,
+nota3,
+nota4,
+(nota1 + nota2 + nota3 + nota4) / 4  AS media,
+CASE
+	WHEN ((nota1 + nota2 + nota3 + nota4) / 4) < 6 THEN 'Reprovado'
+    WHEN ((nota1 + nota2 + nota3 + nota4) / 4) >= 6 THEN 'Aprovado'
+END AS resultado
+FROM alunos;
+
+
 
     
