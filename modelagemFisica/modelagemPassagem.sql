@@ -34,7 +34,7 @@ CREATE TABLE `passagem_onibus`.`viagens` (
     ON UPDATE RESTRICT);
 
 
-/*CREATE TABLE passagens (
+CREATE TABLE passagens (
     id INT AUTO_INCREMENT PRIMARY KEY,
     viagem_id INT,
     passageiro_id INT,
@@ -42,5 +42,5 @@ CREATE TABLE `passagem_onibus`.`viagens` (
     FOREIGN KEY (viagem_id) REFERENCES viagens(id),
     FOREIGN KEY (passageiro_id) REFERENCES passageiros(id),
     CONSTRAINT unique_assento UNIQUE (viagem_id, assento_numero)
-);*/
+);
 
