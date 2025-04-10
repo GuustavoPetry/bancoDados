@@ -101,6 +101,22 @@ Por fim, crie uma condicional para indicar a situação do aluno (reprovado, apr
 	IF(((nota1 + nota2 + nota3 + nota4) / 4) >=8, 'Aprovado', 'Reprovado') AS situacao_if
 	FROM alunos;
 
+-- Instrução INSERT:
+	INSERT INTO contas (nome, saldo) VALUES
+	('Diego', 100.00),
+	('Maria', 500.00);
+
+	-- Criando uma transação de transferência de valores:
+		START TRANSACTION;
+
+		UPDATE contas SET saldo = saldo - 200 WHERE nome = 'Maria';
+		SAVEPOINT depois_maria;
+		UPDATE contas SET saldo = saldo + 200 WHERE nome = 'Diego';
+
+		ROLLBACK TO depois_maria; -- O que tiver entre o SAVEPOINT e ROLLBACK não será executado;
+
+		COMMIT; -- A transação só ira ocorrer se o 'COMMIT' for executado.
+
 
 
     

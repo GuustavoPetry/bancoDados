@@ -112,3 +112,9 @@ CREATE TABLE alunos (
     nota3 DOUBLE NOT NULL,
     nota4 DOUBLE NOT NULL
 );
+
+CREATE TABLE contas (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(150) NOT NULL,
+    saldo DECIMAL(10,2)
+);
